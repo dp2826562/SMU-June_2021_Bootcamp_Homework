@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Sub Stockanalysis()\
+    \
+    ' Declare Current as a worksheet object variable.\
+    ' Dim ws As Worksheet\
+    \
+    ' Set an initial variable for holding the Stock Ticker\
+            Dim stock_ticker As String\
+     \
+      'Find the last non_blank cell in column A(i)\
+            Dim last_row As Long\
+     \
+     ' Set an initial variable for holding the total volume per stock ticker\
+            Dim volume_total As Double\
+    \
+\
+    'keep track of yearly change items\
+    Dim final_close As Double\
+    Dim first_open As Double\
+    Dim yearly_change As Double\
+    Dim percent_change As Double\
+    \
+    ' Loop through all of the worksheets in the active workbook.\
+    ' For Each ws In Worksheets\
+    ' which worksheet are we on\
+    ' MsgBox = (ws.Name)\
+    \
+         \
+    ' initialize variables\
+    last_row = Cells(Rows.Count, "A").End(xlUp).Row\
+    volume_total = 0\
+         \
+    percent_change = 0\
+    yearly_change = 0\
+    final_close = 0\
+    first_open = Cells(2, 3).Value\
+            \
+    Dim summary_table_row As Integer\
+    summary_table_row = 2\
+\
+     ' Loop through all stock prices\
+     For i = 2 To last_row\
+     \
+        ' Check if we are still within the same stock ticker, if we are not ...\
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then\
+     \
+                    'MsgBox the_unique stock_ticker\
+                    ' MsgBox (Cells(i, 1).Value)\
+                    \
+                    ' pull the final closing price\
+                    final_close = Cells(i, 6).Value\
+                \
+                    'Do Work\
+                    ' Add to the Volume Total\
+                    volume_total = volume_total + Cells(i, 7).Value\
+                    yearly_change = final_close - first_open\
+                    percent_change = 100 * (yearly_change / first_open)\
+                    \
+                    stock_ticker = Cells(i, 1).Value\
+                    \
+                    ' avoid divide by zero\
+                        ' If first_open = 0 Then\
+                        'Percent Change = 0\
+                        ' percent_change = 100 * (yearly_change / 1E-08)\
+                    \
+                    ' Else\
+                    ' percent_change = 100 * (yearly_change / first_open)\
+                    \
+                    ' End If\
+                    \
+                     ' Color  yearly_change\
+                    If yearly_change > 0 Then\
+                    Cells(summary_table_row, 10).Interior.ColorIndex = 4\
+                    Else\
+                    Cells(summary_table_row, 10).Interior.ColorIndex = 3\
+                    End If\
+                    \
+                    ' append to summary table\
+                    Cells(summary_table_row, 9).Value = stock_ticker\
+                    Cells(summary_table_row, 12).Value = volume_total\
+                    Cells(summary_table_row, 10).Value = yearly_change\
+                    Cells(summary_table_row, 11).Value = percent_change\
+                    \
+                    'now reset our summary table and volume\
+                    summary_table_row = summary_table_row + 1\
+                    volume_total = 0\
+                    'next get open price of NEXT group\
+                    first_open = Cells(i + 1, 3).Value\
+                    \
+            ' If the cell immediately following a row is the same stock...\
+            Else\
+                \
+            ' Add to the Volume Total\
+            volume_total = volume_total + Cells(i, 7).Value\
+\
+       End If\
+    \
+     Next i\
+     \
+    ' Next worksheet\
+\
+End Sub\
+\
+}
