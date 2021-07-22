@@ -1,0 +1,356 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red93\green108\blue121;\red255\green255\blue255;\red0\green0\blue0;
+\red155\green35\blue147;\red196\green26\blue22;\red28\green0\blue207;}
+{\*\expandedcolortbl;;\csgenericrgb\c36526\c42188\c47515;\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c0\c0\c0\c85000;
+\csgenericrgb\c60759\c13753\c57628;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c11000\c0\c81000;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab593
+\pard\tx593\pardeftab593\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 #!/usr/bin/env python\cf4 \
+\cf2 # coding: utf-8\cf4 \
+\
+\cf2 # ### Note\cf4 \
+\cf2 # * Instructions have been included for each segment. You do not have to follow them exactly, but they are included to help you think through the steps.\cf4 \
+\
+\cf2 # In[1]:\cf4 \
+\
+\
+\cf2 # Dependencies and Setup\cf4 \
+
+\f1\b \cf5 import
+\f0\b0 \cf4  pandas 
+\f1\b \cf5 as
+\f0\b0 \cf4  pd\
+\
+\cf2 # File to Load (Remember to Change These)\cf4 \
+file_to_load = \cf6 "Resources/purchase_data.csv"\cf4 \
+\
+\cf2 # Read Purchasing File and store into Pandas data frame\cf4 \
+purchase_data = pd.read_csv(file_to_load)\
+\
+\
+\cf2 # In[2]:\cf4 \
+\
+\
+purchase_data.head()\
+\
+\
+\cf2 # In[3]:\cf4 \
+\
+\
+len(purchase_data)\
+\
+\
+\cf2 # In[4]:\cf4 \
+\
+\
+\cf2 # Create a DataFrame of frames using a dictionary of lists\cf4 \
+purchase_frame = pd.DataFrame(\{\
+    \cf6 "Amount of Purchases"\cf4 : [\cf6 "780"\cf4 ]\})\
+purchase_frame\
+\
+\
+\cf2 # ## Player Count\cf4 \
+\
+\cf2 # * Display the total number of players\cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[5]:\cf4 \
+\
+\
+purchase_data.SN.nunique()\
+\
+\
+\cf2 # ## Purchasing Analysis (Total)\cf4 \
+\
+\cf2 # * Run basic calculations to obtain number of unique items, average price, etc.\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Create a summary data frame to hold the results\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: give the displayed data cleaner formatting\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display the summary data frame\cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[6]:\cf4 \
+\
+\
+table_one = purchase_data[\cf6 "Item ID"\cf4 ].nunique()\
+mean_price = purchase_data.Price.mean()\
+total_purchases=len(purchase_data)\
+revenue = purchase_data.Price.sum()\
+\
+data_row = [table_one, mean_price, total_purchases, revenue]\
+\
+data_display  = \{\cf7 'Item ID '\cf4 : [table_one],\
+        \cf7 'Mean Price'\cf4 : [mean_price],\
+        \cf7 'Total Purchases'\cf4 : [total_purchases],\
+        \cf7 'Revenue'\cf4 : [revenue]\}\
+\
+pd.DataFrame(data_display)\
+\
+\
+\cf2 # ## Gender Demographics\cf4 \
+\
+\cf2 # * Percentage and Count of Male Players\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Percentage and Count of Female Players\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Percentage and Count of Other / Non-Disclosed\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[7]:\cf4 \
+\
+\
+purchase_data.groupby(\cf6 "Gender"\cf4 ).size()\
+\
+\
+\cf2 # In[8]:\cf4 \
+\
+\
+gender_data = purchase_data.loc[:,[\cf6 "SN"\cf4 , \cf6 "Age"\cf4 , \cf6 "Gender"\cf4 ]].drop_duplicates().reset_index(drop=
+\f1\b \cf5 True
+\f0\b0 \cf4 )\
+gender_data.head()\
+\
+\
+\cf2 # In[9]:\cf4 \
+\
+\
+gender_data2 = pd.DataFrame(gender_data.groupby(\cf6 "Gender"\cf4 ).size(), columns = [\cf6 "Count"\cf4 ])\
+gender_data2[\cf6 "Percentage"\cf4 ]= gender_data2[\cf6 "Count"\cf4 ] / len(gender_data) * \cf7 100\cf4 \
+gender_data2\
+\
+\
+\cf2 # \cf4 \
+\cf2 # ## Purchasing Analysis (Gender)\cf4 \
+\
+\cf2 # * Run basic calculations to obtain purchase count, avg. purchase price, avg. purchase total per person etc. by gender\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Create a summary data frame to hold the results\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: give the displayed data cleaner formatting\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display the summary data frame\cf4 \
+\
+\cf2 # In[10]:\cf4 \
+\
+\
+gender_purcount = purchase_data.groupby(\cf6 "Gender"\cf4 ).size()\
+gender_prcount = purchase_data.groupby(\cf6 "Gender"\cf4 ).Price.mean()\
+gender_prsumm = purchase_data.groupby(\cf6 "Gender"\cf4 ).Price.sum()\
+\
+\
+gender_pursummary = pd.DataFrame([gender_purcount,gender_prcount,gender_prsumm]).T\
+gender_pursummary.columns = [\cf6 "Total Purchases"\cf4 , \cf6 "Average Purchases"\cf4 , \cf6 "Sum Purchases"\cf4 ]\
+gender_pursummary [\cf6 "Purchases by Player Average"\cf4 ] = gender_pursummary [\cf6 "Sum Purchases"\cf4 ] / gender_data2[\cf6 "Count"\cf4 ]\
+                             \
+gender_pursummary\
+\
+\
+\cf2 # ## Age Demographics\cf4 \
+\
+\cf2 # * Establish bins for ages\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Categorize the existing players using the age bins. Hint: use pd.cut()\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Calculate the numbers and percentages by age group\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Create a summary data frame to hold the results\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: round the percentage column to two decimal points\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display Age Demographics Table\cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[11]:\cf4 \
+\
+\
+bins = [\cf7 0\cf4 ,\cf7 9\cf4 ,\cf7 14\cf4 ,\cf7 19\cf4 ,\cf7 24\cf4 ,\cf7 29\cf4 ,\cf7 34\cf4 ,\cf7 39\cf4 ,\cf7 10000\cf4 ]\
+\
+\cf2 # Create the names for the bins\cf4 \
+group_names = [\cf6 "<10"\cf4 , \cf6 "10-14"\cf4 , \cf6 "15-19"\cf4 , \cf6 "20-24"\cf4 , \cf6 "25-29"\cf4 , \cf6 "30-34"\cf4 , \cf6 "35-39"\cf4 , \cf6 "40+"\cf4 ]\
+\
+\
+\cf2 # In[12]:\cf4 \
+\
+\
+gender_data[\cf6 "Age Group"\cf4 ] = pd.cut(gender_data[\cf6 "Age"\cf4 ], bins, labels=group_names, include_lowest=
+\f1\b \cf5 True
+\f0\b0 \cf4 )\
+gender_data\
+\
+\
+\cf2 # In[13]:\cf4 \
+\
+\
+player_agesum = pd.DataFrame(gender_data.groupby(\cf6 "Age Group"\cf4 ).size(), columns=[\cf6 "Count"\cf4 ])\
+player_agesum[\cf6 "Percentage"\cf4 ] = player_agesum[\cf6 "Count"\cf4 ] / len(gender_data) * \cf7 100\cf4 \
+player_agesum \
+\
+\
+\cf2 # ## Purchasing Analysis (Age)\cf4 \
+\
+\cf2 # * Bin the purchase_data data frame by age\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Run basic calculations to obtain purchase count, avg. purchase price, avg. purchase total per person etc. in the table below\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Create a summary data frame to hold the results\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: give the displayed data cleaner formatting\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display the summary data frame\cf4 \
+\
+\cf2 # In[14]:\cf4 \
+\
+\
+purchase_data[\cf6 "Age Group"\cf4 ] = pd.cut(purchase_data[\cf6 "Age"\cf4 ], bins, labels=group_names, include_lowest=
+\f1\b \cf5 True
+\f0\b0 \cf4 )\
+purchase_data.head()\
+\
+\
+\cf2 # In[15]:\cf4 \
+\
+\
+age_purcount = purchase_data.groupby(\cf6 "Age Group"\cf4 ).size()\
+age_prcount = purchase_data.groupby(\cf6 "Age Group"\cf4 ).Price.mean()\
+age_prsumm = purchase_data.groupby(\cf6 "Age Group"\cf4 ).Price.sum()\
+\
+\
+age_pursummary = pd.DataFrame([age_purcount,age_prcount,age_prsumm]).T\
+age_pursummary.columns = [\cf6 "Total Purchases"\cf4 , \cf6 "Average Purchases"\cf4 , \cf6 "Sum Purchases"\cf4 ]\
+age_pursummary [\cf6 "Purchases by Player Average"\cf4 ] = age_pursummary [\cf6 "Sum Purchases"\cf4 ] / gender_data2[\cf6 "Count"\cf4 ]\
+                                \
+age_pursummary\
+\
+\
+\cf2 # ## Top Spenders\cf4 \
+\
+\cf2 # * Run basic calculations to obtain the results in the table below\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Create a summary data frame to hold the results\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Sort the total purchase value column in descending order\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: give the displayed data cleaner formatting\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display a preview of the summary data frame\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[16]:\cf4 \
+\
+\
+sn_purcount = purchase_data.groupby(\cf6 "SN"\cf4 ).size()\
+sn_prcount = purchase_data.groupby(\cf6 "SN"\cf4 ).Price.mean()\
+sn_prsumm = purchase_data.groupby(\cf6 "SN"\cf4 ).Price.sum()\
+\
+\
+\cf2 # In[17]:\cf4 \
+\
+\
+sn_pursummary = pd.DataFrame([sn_purcount,sn_prcount,sn_prsumm]).T\
+sn_pursummary.columns = [\cf6 "Total Purchases"\cf4 , \cf6 "Average Purchases"\cf4 , \cf6 "Sum Purchases"\cf4 ]\
+sn_pursummary.sort_values(by=\cf6 "Sum Purchases"\cf4 , ascending=
+\f1\b \cf5 False
+\f0\b0 \cf4 )\
+\
+\
+\cf2 # ## Most Popular Items\cf4 \
+\
+\cf2 # * Retrieve the Item ID, Item Name, and Item Price columns\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Group by Item ID and Item Name. Perform calculations to obtain purchase count, average item price, and total purchase value\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Create a summary data frame to hold the results\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Sort the purchase count column in descending order\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: give the displayed data cleaner formatting\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display a preview of the summary data frame\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[18]:\cf4 \
+\
+\
+popular_data = purchase_data.loc[:, [\cf6 "Item ID"\cf4 , \cf6 "Item Name"\cf4 , \cf6 "Price"\cf4 ]]\
+popular_data.head()\
+\
+\
+\cf2 # In[20]:\cf4 \
+\
+\
+pop_purcount = purchase_data.groupby([\cf6 "Item ID"\cf4 , \cf6 "Item Name"\cf4 ]).size()\
+pop_prcount = purchase_data.groupby([\cf6 "Item ID"\cf4 , \cf6 "Item Name"\cf4 ]).Price.mean()\
+pop_prsumm = purchase_data.groupby([\cf6 "Item ID"\cf4 , \cf6 "Item Name"\cf4 ]).Price.sum()\
+\
+\
+\cf2 # In[21]:\cf4 \
+\
+\
+pop_pursummary = pd.DataFrame([pop_purcount,pop_prcount,pop_prsumm]).T\
+pop_pursummary.columns = [\cf6 "Total Purchases"\cf4 , \cf6 "Average Purchases"\cf4 , \cf6 "Sum Purchases"\cf4 ]\
+pop_pursummary.sort_values(by=\cf6 "Total Purchases"\cf4 , ascending=
+\f1\b \cf5 False
+\f0\b0 \cf4 )\
+\
+\
+\cf2 # ## Most Profitable Items\cf4 \
+\
+\cf2 # * Sort the above table by total purchase value in descending order\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Optional: give the displayed data cleaner formatting\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\cf2 # * Display a preview of the data frame\cf4 \
+\cf2 # \cf4 \
+\cf2 # \cf4 \
+\
+\cf2 # In[24]:\cf4 \
+\
+\
+pop_pursummary.sort_values(by=\cf6 "Sum Purchases"\cf4 , ascending=
+\f1\b \cf5 False
+\f0\b0 \cf4 ).head()\
+\
+\
+\cf2 # In[ ]:\cf4 \
+\
+\
+}
