@@ -20,7 +20,7 @@
     
     </head>
     
-
+    
 
 <body style="background-color: grey;">
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -40,7 +40,7 @@
                           <a class="dropdown-item" href="temperature.html">Temperature</a>
                           <a class="dropdown-item" href="humidity.html">Humidity</a>
                           <a class="dropdown-item" href="cloudiness.html">Cloudiness</a>
-                          <a class="dropdown-item" href="wind_speed.html">Wind_Speed</a>
+                          <a class="dropdown-item" href="windspeed.html">Wind_Speed</a>
                         </div>
                       </li>
                     <li class="nav-item">
@@ -53,60 +53,78 @@
             </div>
         </div>
     </nav>
-</body>
+
+
+
+       <!---- containers -->
 <div class="container">
-    <div class="row>"
-        <div class="col-md-8>">
-                <!-- containers -->
-            <div class= "container" style="background-color:white;">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <h1>Summary: Latitude vs. Humidity</h1> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                         <div class="col-md-12"></div>
-                        <img src=assets/images/Fig2.png height="80%" width="80%">
-                        <div class="col-md-12"></div>
-                        <div class="row">    
-                            <div class="col-md-12">
-                        <p>There is a positive correlation between Humidity and Latitude. This shows a higher humidity in the Northern Hemisphere.</p>
-                        <p>There is a slightly negative correlation between Humidity and Latitude in the Southern Hemisphere. This shows a lower humidity the closer to zero-degree latitude at the equator.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class= "container" style="background-color:white;">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container" style="background-color: white;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Visualizations</h1> 
+                        <h1>Summary Latitude vx X </h1>
                     </div>
                 </div>
-            </div>
-            <hr>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <img src=assets/images/Fig1.png height="100%" width="100%">
+        
+                <hr>
+        
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="assests/images/Fig1.png" height="100%" width="100%">
+                    </div>
+        
+                    <div class="col-md-4">
+                        <p> Objective: Analyze weather related to Latitude versus Temperature, Humidity, Cloudiness and Windspeed.</p>
+                        <p> Data Overview: Our data contains weather information pertaining to 500 cities.  The data variables include 
+                            the city, country, latitude, longitude, temperature, wind, pressure and humidity.  </p>
+                        <p>Data Insights: 
+                            Based on the latitude and temperature plots, there is a positive correlation with the temperature being 
+                            higher the closer you are to zero-degree latitude (at the equator).  There is also a negative correlation 
+                            between latitude and temperature with temperatures being lower the farther north toward higher latitudes such 
+                            as 60-80 degrees latitude.  Another observation is that the windspeeds are higher in the Northern Hemisphere 
+                            while the windspeeds are lower and more moderate in the Southern Hemisphere. The following pages give in depth 
+                            analysis for Northern and Southern Hemisphere based on the variables of temperature, wind, pressure and humidity. 
+                            </p>
+                        <p>Call to Action: I recommend that the most likely location to plan a vacation would be in the Southern 
+                            Hemisphere at about 10-20 degrees latitude to optimize the humidity, temperature and windspeeds as 
+                            reflected in the regression models. </p>
+                    </div>
+        
+        
                 </div>
-                <div class="col-md-6">
-                    <img src=assets/images/Fig2.png height="100%" width="100%" style="border: solid 3px black">
+            </div>
+        
+        <div class="col-md-4">
+            <div class="container" style="background-color: white;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Visualizations</h1>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src=assets/images/Fig3.png height="100%" width="100%">
+                        <img src="assests/images/Fig1.png" height="100%" width="100%">
                     </div>
                     <div class="col-md-6">
-                        <img src=assets/images/Fig4.png height="100%" width="100%">
+                        <img src="assests/images/Fig2.png" height="100%" width="100%">
+        
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="assests/images/Fig3.png" height="100%" width="100%">
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assests/images/Fig4.png" height="100%" width="100%">
+            
+                        </div>
                 </div>
             </div>
         </div>
+        </div>
     </div>
+</div>
+
 
 </body>
 </html>
